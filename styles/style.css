@@ -111,8 +111,8 @@
 .profile__avatar {
   width: 120px;
   height: 120px;
-  object-fit: cover;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 .profile__info {
@@ -217,4 +217,84 @@
   .profile__add-button {
     width: 100%;
   }
+}
+
+/* elements */
+
+.elements {
+  padding: 1px 0;
+}
+
+.elements__list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  justify-content: center;
+  gap: 20px 17px;
+  list-style: none;
+}
+
+@media (max-width: 576px) {
+  .elements__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.elements__item {
+  background: #fff;
+  border-radius: 10px;
+}
+
+.elements__link {
+  display: flex;
+  border-radius: 10px 10px 0 0;
+}
+
+.elements__image {
+  width: 100%;
+  display: flex;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+}
+
+.elements__content {
+  margin: 25px 0 31px 0;
+  padding: 0 15px 0 21px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.elements__title {
+  max-width: 224px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.21;
+  color: #000;
+  text-rendering: optimizeLegibility;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.elements__like-button {
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  background: url(../images/elements-like-button.svg) center / 22px 19px no-repeat;
+  border: 0;
+  border-radius: 2px;
+  transition: 1s;
+}
+
+.elements__like-button:hover {
+  opacity: .6;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.elements__like-button_active {
+  background: url(../images/elements-like-button-active.svg) center / cover;
 }
