@@ -3,9 +3,11 @@
 const popupOpenButton = document.querySelector('.profile__edit');
 const popup = document.querySelector('.popup');
 const popupCloseButton = popup.querySelector('.popup__close');
+const page = document.querySelector('.page');
 
 const popupToggle = function () {
   popup.classList.toggle('popup_opened');
+  page.classList.toggle('page_locked')
 }
 
 // Навесить слушатель на клик по кнопке .profile__edit

@@ -5,7 +5,7 @@
   width: 32px;
   height: 32px;
   padding: 0;
-  background: url(../images/popup-close.svg) center / cover;
+  background: url(../../../images/popup-close.svg) center / cover;
   border: 0;
   transition: 1s;
 }
