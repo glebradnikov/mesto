@@ -1,7 +1,7 @@
 .header {
   box-sizing: border-box;
   height: 74px;
-  margin: 45px 0 40px;
+  margin: 0 0 40px;
   display: flex;
   border-bottom: 1px solid #545454;
 }
@@ -9,7 +9,7 @@
 @media (max-width: 768px) {
   .header {
     height: 56px;
-    margin: 28px 0 42px;
+    margin: 0 0 42px;
     padding: 0 27px;
   }
 }

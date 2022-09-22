@@ -14,7 +14,6 @@
 
 @media (max-width: 768px) {
   .profile__name {
-    padding: 0 0 0 28px;
     font-size: 27px;
     line-height: 1.22;
   }
@@ -22,6 +21,7 @@
 
 @media (max-width: 576px) {
   .profile__name {
+    padding: 0 0 0 28px;
     text-align: center;
   }
 }
