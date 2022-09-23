@@ -1,0 +1,9 @@
+.popup__input_profile_job {
+  margin: 0 0 48px;
+}
+
+@media (max-width: 768px) {
+  .popup__input_profile_job {
+    margin: 0 0 45px;
+  }
+}

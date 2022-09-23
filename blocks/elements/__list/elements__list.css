@@ -7,9 +7,3 @@
   gap: 20px 17px;
   list-style: none;
 }
-
-@media (max-width: 576px) {
-  .elements__list {
-    grid-template-columns: 1fr;
-  }
-}
