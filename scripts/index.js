@@ -7,11 +7,15 @@ let popupForm = popup.querySelector('.popup__form');
 let popupInputProfileName = popup.querySelector('.popup__input_profile_name');
 let popupInputProfileJob = popup.querySelector('.popup__input_profile_job');
 
-function popupToggle() {
-  popup.classList.toggle('popup_active');
+function openPopup() {
+  popup.classList.add('popup_active');
 
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileJob.value = profileJob.textContent;
+}
+
+function closePopup() {
+  popup.classList.remove('popup_active');
 }
 
 function popupFormSubmitHandler(evt) {
@@ -20,9 +24,9 @@ function popupFormSubmitHandler(evt) {
   profileName.textContent = popupInputProfileName.value;
   profileJob.textContent = popupInputProfileJob.value;
 
-  popupToggle();
+  closePopup();
 }
 
-profileEdit.addEventListener('click', popupToggle);
-popupClose.addEventListener('click', popupToggle);
+profileEdit.addEventListener('click', openPopup);
+popupClose.addEventListener('click', closePopup);
 popupForm.addEventListener('submit', popupFormSubmitHandler);
