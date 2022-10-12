@@ -1,4 +1,4 @@
-.profile__job {
+.profile__workplace {
   max-width: 336px;
   margin: 0;
   grid-column: 1 / -1;
@@ -12,14 +12,14 @@
 }
 
 @media (max-width: 768px) {
-  .profile__job {
+  .profile__workplace {
     font-size: 14px;
     line-height: 1.21;
   }
 }
 
 @media (max-width: 576px) {
-  .profile__job {
+  .profile__workplace {
     text-align: center;
   }
 }

@@ -1,4 +1,4 @@
-.popup__save {
+.popup__submit {
   width: 100%;
   min-height: 50px;
   margin: 0;
@@ -14,13 +14,13 @@
   transition: 1s;
 }
 
-.popup__save:hover {
+.popup__submit:hover {
   opacity: .8;
   transition: .5s;
 }
 
 @media (max-width: 768px) {
-  .popup__save {
+  .popup__submit {
     min-height: 46px;
     font-size: 14px;
     line-height: 1.21;

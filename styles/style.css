@@ -1,21 +1,29 @@
-.popup {
+.image-popup {
   position: fixed;
   top: 0;
   left: 0;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, .5);
-  visibility: hidden;
-  opacity: 0;
-  transition: .5s;
 }
 
 @media (max-width: 768px) {
-  .popup {
+  .image-popup {
     padding: 0 19px;
   }
+}
+
+.image-popup_active {
+  display: flex;
+}
+
+.image-popup__container {
+  position: relative;
+  max-width: 75vw;
+  max-height: 75vh;
+  background: #fff;
 }
