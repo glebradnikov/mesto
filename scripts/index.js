@@ -9,7 +9,6 @@ const profileEditButton = document.querySelector('.profile__edit');
 const profileName = document.querySelector('.profile__name');
 const profileWorkplace = document.querySelector('.profile__workplace');
 
-
 const openEditProfilePopup = () => {
   editProfile.classList.add('popup_active');
 
@@ -33,8 +32,6 @@ const editProfileSubmitHandler = (event) => {
 profileEditButton.addEventListener('click', openEditProfilePopup);
 editProfileCloseButton.addEventListener('click', closeEditProfilePopup);
 popupFormEditProfile.addEventListener('submit', editProfileSubmitHandler);
-
-
 
 // Шесть карточек «из коробки»
 
@@ -68,7 +65,6 @@ const initialElements = [
     link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR3_4lzwSClrnXLzBchtnOLQd5tqqGjPz-IscBlPa8uinSlqxaCSH-7_kJazYGbXJBL'
   }
 ];
-
 const elementsList = document.querySelector('.elements__list');
 
 const render = () => {
