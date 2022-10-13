@@ -1,7 +1,7 @@
 // Форма редактирования профиля
 
-const popupEditProfile = document.querySelector('.popup_edit_profile');
-const popupEditProfileCloseButton = document.querySelector('.popup__close_edit-profile');
+const editProfile = document.querySelector('#edit-profile');
+const editProfileCloseButton = document.querySelector('.popup__close_edit-profile');
 const popupFormEditProfile = document.querySelector('.popup__form_edit_profile');
 const popupInputProfileName = document.querySelector('.popup__input_profile_name');
 const popupInputProfileWorkplace = document.querySelector('.popup__input_profile_workplace');
@@ -11,17 +11,17 @@ const profileWorkplace = document.querySelector('.profile__workplace');
 
 
 const openEditProfilePopup = () => {
-  popupEditProfile.classList.add('popup_active');
+  editProfile.classList.add('popup_active');
 
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileWorkplace.value = profileWorkplace.textContent;
 };
 
 const closeEditProfilePopup = () => {
-  popupEditProfile.classList.remove('popup_active');
+  editProfile.classList.remove('popup_active');
 };
 
-const popupEditProfileSubmitHandler = (event) => {
+const editProfileSubmitHandler = (event) => {
   event.preventDefault();
 
   profileName.textContent = popupInputProfileName.value;
@@ -31,8 +31,8 @@ const popupEditProfileSubmitHandler = (event) => {
 }
 
 profileEditButton.addEventListener('click', openEditProfilePopup);
-popupEditProfileCloseButton.addEventListener('click', closeEditProfilePopup);
-popupFormEditProfile.addEventListener('submit', popupEditProfileSubmitHandler);
+editProfileCloseButton.addEventListener('click', closeEditProfilePopup);
+popupFormEditProfile.addEventListener('submit', editProfileSubmitHandler);
 
 
 
@@ -40,28 +40,32 @@ popupFormEditProfile.addEventListener('submit', popupEditProfileSubmitHandler);
 
 const initialElements = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: 'Сергиев Посад',
+    link: 'http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT2sYSBCbVPFgNXBYpLGqM-6C6PhmuN8UA8-v1RkkPY_AeN6eEhEoSw34Mni_6ys49g'
   },
   {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    name: 'Переславль-Залесский',
+    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSpJDJF-65H9WAIWtbLyASLQd1gyhDVDRTRoW87xU-zonvstAbHmZaZ2ej5q6Hxv4CC'
+  },
+  {
+    name: 'Ростов',
+    link: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcSYXRn1yKNBefFGDE-9frz5ho_CFj71azeriOwyXIUiHoFujCg3DFBOTxqKsdwsMhBJ'
+  },
+  {
+    name: 'Ярославль',
+    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcQVHNx0mp2o8d1SqsaygMQRaT9gs_2jOv2UrnXVGQ60rbAyQFCeYGWTgPp81ryLO50y'
+  },
+  {
+    name: 'Кострома',
+    link: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Ipatiev02.jpg/1280px-Ipatiev02.jpg'
   },
   {
     name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    link: 'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcQZNA0WIEbiKWwk1wMlQ_4L6Iz0l21P9KlQQsJ2R5mwatNicThwQuadMcX6mA8jtPf2'
   },
   {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    name: 'Владимир',
+    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR3_4lzwSClrnXLzBchtnOLQd5tqqGjPz-IscBlPa8uinSlqxaCSH-7_kJazYGbXJBL'
   }
 ];
 
@@ -83,6 +87,8 @@ const createItemNode = (name, link) => {
 
   elementsTitle.textContent = name;
   elementsImage.src = link;
+
+  elementsImage.alt = elementsTitle.textContent;
 
   // Лайк карточки
 
@@ -107,13 +113,24 @@ const createItemNode = (name, link) => {
 
   // Открытие попапа с картинкой
 
-  // const imagePopup = document.querySelector('.image-popup');
+  const imagePopup = document.querySelector('.image-popup');
+  const imagePopupCloseButton = document.querySelector('.image-popup__close');
+  const imagePopupImage = document.querySelector('.image-popup__image');
+  const imagePopupCaption = document.querySelector('.image-popup__caption');
 
-  // const imagePopupToggle = () => {
-  //   imagePopup.classList.toggle('image-popup_active');
-  // };
+  const openImagePopup = () => {
+    imagePopup.classList.add('image-popup_active');
+    imagePopupImage.src = elementsImage.src;
+    imagePopupImage.alt = elementsImage.alt;
+    imagePopupCaption.textContent = elementsTitle.textContent;
+  };
 
-  // elementsImage.addEventListener('click', imagePopupToggle);
+  const closeImagePopup = () => {
+    imagePopup.classList.remove('image-popup_active');
+  };
+
+  elementsImage.addEventListener('click', openImagePopup);
+  imagePopupCloseButton.addEventListener('click', closeImagePopup);
 
   return itemNode;
 };
@@ -122,20 +139,20 @@ render();
 
 // Форма добавления карточки
 
-const popupAddElement = document.querySelector('.popup_add_element');
-const popupAddElementCloseButton = document.querySelector('.popup__close_add-element');
+const addElement = document.querySelector('#add-element');
+const addElementCloseButton = document.querySelector('.popup__close_add-element');
 const profileAddButton = document.querySelector('.profile__add');
 
 const openAddElementPopup = () => {
-  popupAddElement.classList.add('popup_active');
+  addElement.classList.add('popup_active');
 };
 
 const closeAddElementPopup = () => {
-  popupAddElement.classList.remove('popup_active');
+  addElement.classList.remove('popup_active');
 };
 
 profileAddButton.addEventListener('click', openAddElementPopup);
-popupAddElementCloseButton.addEventListener('click', closeAddElementPopup);
+addElementCloseButton.addEventListener('click', closeAddElementPopup);
 
 // Добавление карточки
 

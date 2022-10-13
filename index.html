@@ -6,7 +6,6 @@
     <title>Mesto</title>
     <link rel="icon" href="favicon.png">
     <link rel="stylesheet" href="pages/index.css">
-    <!-- <link rel="stylesheet" href="styles/st/yle.css"> -->
     <script src="scripts/index.js" defer></script>
   </head>
   <body class="page">
@@ -34,62 +33,7 @@
       </section>
 
       <section class="elements">
-        <ul class="elements__list">
-          <!-- <li class="elements__item">
-            <img src="images/elements-image-karachaevsk.jpg" alt="Карачаевск"
-                 class="elements__image">
-            <div class="elements__content">
-              <h2 class="elements__title">Карачаевск</h2>
-              <button type="button" aria-label="Нравится"
-                      class="elements__like"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="images/elements-image-mountain-elbrus.jpg"
-                 alt="Гора Эльбрус" class="elements__image">
-            <div class="elements__content">
-              <h2 class="elements__title">Гора Эльбрус</h2>
-              <button type="button" aria-label="Нравится"
-                      class="elements__like"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="images/elements-image-dombai.jpg" alt="Домбай"
-                 class="elements__image">
-            <div class="elements__content">
-              <h2 class="elements__title">Домбай</h2>
-              <button type="button" aria-label="Нравится"
-                      class="elements__like"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="images/elements-image-mountain-elbrus.jpg"
-                 alt="Гора Эльбрус" class="elements__image">
-            <div class="elements__content">
-              <h2 class="elements__title">Гора Эльбрус</h2>
-              <button type="button" aria-label="Нравится"
-                      class="elements__like"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="images/elements-image-dombai.jpg" alt="Домбай"
-                 class="elements__image">
-            <div class="elements__content">
-              <h2 class="elements__title">Домбай</h2>
-              <button type="button" aria-label="Нравится"
-                      class="elements__like"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="images/elements-image-karachaevsk.jpg"
-                 alt="Карачаево-Черкесская Республика" class="elements__image">
-            <div class="elements__content">
-              <h2 class="elements__title">Карачаево-Черкесская Республика</h2>
-              <button type="button" aria-label="Нравится"
-                      class="elements__like"></button>
-            </div>
-          </li> -->
-        </ul>
+        <ul class="elements__list"></ul>
       </section>
     </main>
 
@@ -97,7 +41,7 @@
       <p lang="en" class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup popup_edit_profile">
+    <div id="edit-profile" class="popup">
       <div class="popup__container">
         <button type="button" aria-label="Закрыть"
                 class="popup__close popup__close_edit-profile"></button>
@@ -113,7 +57,7 @@
       </div>
     </div>
 
-    <div class="popup popup_add_element">
+    <div id="add-element" class="popup">
       <div class="popup__container">
         <button type="button" aria-label="Закрыть"
                 class="popup__close popup__close_add-element"></button>
@@ -128,12 +72,16 @@
       </div>
     </div>
 
-    <!-- <div class="image-popup">
+    <div class="image-popup">
       <div class="image-popup__container">
         <button type="button" aria-label="Закрыть"
-                class="popup__close"></button>
+                class="image-popup__close popup__close popup__close_image_popup"></button>
+        <figure class="image-popup__figure">
+          <img src="" alt="" class="image-popup__image">
+          <figcaption class="image-popup__caption"></figcaption>
+        </figure>
       </div>
-    </div> -->
+    </div>
 
     <template class="template">
       <li class="elements__item">
