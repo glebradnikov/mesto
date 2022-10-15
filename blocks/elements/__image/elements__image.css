@@ -4,4 +4,10 @@
   display: flex;
   border-radius: 10px 10px 0 0;
   object-fit: cover;
+  transition: 1s;
+}
+
+.elements__image:hover {
+  filter: brightness(.8) sepia(100%);
+  transition: .5s;
 }
