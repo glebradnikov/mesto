@@ -41,44 +41,46 @@
       <p lang="en" class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
-    <div id="edit-profile" class="popup">
-      <div class="popup__container">
+    <div id="edit-profile-popup" class="popup">
+      <div class="popup__form-container">
         <button type="button" aria-label="Закрыть"
-                class="popup__close popup__close_edit-profile"></button>
-        <form name="edit" class="popup__form popup__form_edit_profile">
+                class="popup__close"></button>
+        <form name="edit" id="edit-profile-popup-form" class="popup__form">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input type="text" name="name" placeholder="Имя" maxlength="30"
-                 class="popup__input popup__input_profile_name" required>
+                 id="edit-profile-popup-input-name" class="popup__input"
+                 required>
           <input type="text" name="workplace" placeholder="Место работы"
-                 maxlength="150"
-                 class="popup__input popup__input_profile_workplace" required>
+                 maxlength="150" id="edit-profile-popup-input-workplace"
+                 class="popup__input" required>
           <button type="submit" class="popup__submit">Сохранить</button>
         </form>
       </div>
     </div>
 
-    <div id="add-element" class="popup">
-      <div class="popup__container">
+    <div id="add-element-popup" class="popup">
+      <div class="popup__form-container">
         <button type="button" aria-label="Закрыть"
-                class="popup__close popup__close_add-element"></button>
-        <form name="edit" class="popup__form popup__form_add_element">
+                class="popup__close"></button>
+        <form name="edit" id="add-element-popup-form" class="popup__form">
           <h2 class="popup__title">Новое место</h2>
           <input type="text" name="title" placeholder="Название" maxlength="30"
-                 class="popup__input popup__input_element_title" required>
+                 id="add-element-input-title" class="popup__input" required>
           <input type="text" name="image" placeholder="Ссылка на картинку"
-                 class="popup__input popup__input_element_image" required>
+                 id="add-element-input-image" class="popup__input" required>
           <button type="submit" class="popup__submit">Создать</button>
         </form>
       </div>
     </div>
 
-    <div class="popup-image popup">
-      <div class="popup-image__container">
+    <div id="image-popup" class="popup popup_type_image">
+      <div class="popup__image-container">
         <button type="button" aria-label="Закрыть"
-                class="popup-image__close popup__close"></button>
-        <figure class="popup-image__figure">
-          <img src="#" alt="" class="popup-image__image">
-          <figcaption class="popup-image__caption"></figcaption>
+                class="popup__close"></button>
+        <figure class="popup__figure">
+          <img src="#" alt="" id="image-popup-image" class="popup__image">
+          <figcaption id="image-popup-caption" class="popup__caption">
+          </figcaption>
         </figure>
       </div>
     </div>
