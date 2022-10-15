@@ -65,6 +65,7 @@ const initialElements = [
     link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR3_4lzwSClrnXLzBchtnOLQd5tqqGjPz-IscBlPa8uinSlqxaCSH-7_kJazYGbXJBL'
   }
 ];
+
 const elementsList = document.querySelector('.elements__list');
 
 const render = () => {
@@ -109,20 +110,20 @@ const createItemNode = (name, link) => {
 
   // Открытие попапа с картинкой
 
-  const imagePopup = document.querySelector('.image-popup');
-  const imagePopupCloseButton = document.querySelector('.image-popup__close');
-  const imagePopupImage = document.querySelector('.image-popup__image');
-  const imagePopupCaption = document.querySelector('.image-popup__caption');
+  const imagePopup = document.querySelector('.popup-image');
+  const imagePopupCloseButton = document.querySelector('.popup-image__close');
+  const imagePopupImage = document.querySelector('.popup-image__image');
+  const imagePopupCaption = document.querySelector('.popup-image__caption');
 
   const openImagePopup = () => {
-    imagePopup.classList.add('image-popup_active');
+    imagePopup.classList.add('popup-image_active');
     imagePopupImage.src = elementsImage.src;
     imagePopupImage.alt = elementsImage.alt;
     imagePopupCaption.textContent = elementsTitle.textContent;
   };
 
   const closeImagePopup = () => {
-    imagePopup.classList.remove('image-popup_active');
+    imagePopup.classList.remove('popup-image_active');
   };
 
   elementsImage.addEventListener('click', openImagePopup);
