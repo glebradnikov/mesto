@@ -1,6 +1,7 @@
 .popup__form-container {
   position: relative;
   box-sizing: border-box;
+  width: 100%;
   max-width: 430px;
   padding: 34px 36px 37px;
   background: #fff;

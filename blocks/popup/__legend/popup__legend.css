@@ -1,4 +1,4 @@
-.popup__title {
+.popup__legend {
   margin: 0 0 54px;
   font-size: 24px;
   font-weight: 900;
@@ -7,7 +7,7 @@
 }
 
 @media (max-width: 768px) {
-  .popup__title {
+  .popup__legend {
     margin: 0 0 75px;
     font-size: 18px;
     line-height: 1.22;

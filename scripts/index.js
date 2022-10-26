@@ -1,12 +1,13 @@
 // Объявление переменных
 
-const profileEditButton = document.querySelector('.profile__edit');
+let profileEditButton = document.querySelector('.profile__edit');
 const profileName = document.querySelector('.profile__name');
 const profileWorkplace = document.querySelector('.profile__workplace');
 const profileAddButton = document.querySelector('.profile__add');
 
 const elementsList = document.querySelector('.elements__list');
 
+const popups = document.querySelectorAll('.popup');
 const editProfilePopup = document.querySelector('#edit-profile-popup');
 const addElementPopup = document.querySelector('#add-element-popup');
 const imagePopup = document.querySelector('#image-popup');
@@ -23,13 +24,20 @@ const imagePopupCaption = imagePopup.querySelector('#image-popup-caption');
 const template = document.querySelector('.template');
 
 // Открыть попап
+
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+
+  document.addEventListener('mousedown', closePopupOverlay);
+  document.addEventListener('keydown', closePopupEscape);
 };
 
 // Закрыть попап
+
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+
+  document.removeEventListener('mousedown', closePopupOverlay);
 };
 
 closePopupButtons.forEach((button) => {
@@ -40,29 +48,23 @@ closePopupButtons.forEach((button) => {
   });
 });
 
-// Форма редактирования профиля
+// Закрытие попапа кликом на оверлей
 
-// Открыть форму редактирования профиля
-const openEditProfilePopup = () => {
-  editProfilePopupInputName.value = profileName.textContent;
-  editProfilePopupInputWorkplace.value = profileWorkplace.textContent;
-  
-  openPopup(editProfilePopup);
+const closePopupOverlay = (event) => {
+  closePopup(event.target);
 };
 
-profileEditButton.addEventListener('click', openEditProfilePopup);
+// Закрытие попапа нажатием на Esc
 
-// Отправить форму редактирования профиля
-const editProfile = (event) => {
-  event.preventDefault();
+const closePopupEscape = (event) => {
+  const openedPopup = document.querySelector('.popup_opened');
 
-  profileName.textContent = editProfilePopupInputName.value;
-  profileWorkplace.textContent = editProfilePopupInputWorkplace.value;
+  if (event.key === 'Escape') {
+    openedPopup.classList.remove('popup_opened');
 
-  closePopup(popup);
+    document.removeEventListener('keydown', closePopupEscape);
+  }
 };
-
-editProfilePopupForm.addEventListener('submit', editProfile);
 
 // Шесть карточек «из коробки»
 
@@ -107,16 +109,18 @@ const elementItemNode = (name, link) => {
   elementsTitle.textContent = name;
 
   // Лайк карточки
+
   const elementsLikeButton = elementsItemNode.querySelector('.elements__like');
 
   const activeElementsLikeButton = (event) => {
     event.target.classList.toggle('elements__like_active');
   };
 
-  elementsLikeButton.addEventListener('click', activeElementsLikeButton)
+  elementsLikeButton.addEventListener('click', activeElementsLikeButton);
 
   // Удаление карточки
-  const elementsDeleteButton = elementsItemNode.querySelector('.elements__trash');
+
+  const elementsDeleteButton = elementsItemNode.querySelector('.elements__delete');
 
   const deleteElementsItem = () => {
     const elementsItem = elementsDeleteButton.closest('.elements__item');
@@ -139,7 +143,6 @@ const elementItemNode = (name, link) => {
 
   elementsImage.addEventListener('click', openImagePopup);
 
-  // Вернуть узел
   return elementsItemNode;
 };
 
@@ -153,6 +156,27 @@ const renderelementItemNode = () => {
 };
 
 renderelementItemNode();
+
+// Форма редактирования профиля
+
+// Открыть форму редактирования профиля
+const openEditProfilePopup = () => {
+  openPopup(editProfilePopup);
+};
+
+profileEditButton.addEventListener('click', openEditProfilePopup);
+
+// Отправить форму редактирования профиля
+const editProfile = (event) => {
+  event.preventDefault();
+
+  profileName.textContent = editProfilePopupInputName.value;
+  profileWorkplace.textContent = editProfilePopupInputWorkplace.value;
+
+  closePopup(editProfilePopup);
+};
+
+editProfilePopupForm.addEventListener('submit', editProfile);
 
 // Форма добавления карточки
 
