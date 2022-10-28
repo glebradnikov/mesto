@@ -65,7 +65,8 @@ const setEventListeners = (form) => {
 
 // Добавление обработчиков всем формам
 const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  const formList = Array.from(popupForm);
+
   formList.forEach((form, input, inputError, errorMessageActive, submitButton, submitButtonDisabled) => {
     setEventListeners(form, input, inputError, errorMessageActive, submitButton, submitButtonDisabled);
   });

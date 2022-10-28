@@ -9,17 +9,17 @@ const elementsContainer = document.querySelector('.elements__list');
 
 const popups = document.querySelectorAll('.popup');
 const popupCloseButtons = document.querySelectorAll('.popup__close');
-// const popupForm = document.querySelectorAll('.popup__form');
+const popupForm = document.forms;
 
 const popupEditProfile = document.querySelector('#popup-edit-profile');
-const formEditProfile = popupEditProfile.querySelector('#form-edit-profile');
-const nameInputEditProfile = popupEditProfile.querySelector('#name-input-edit-profile');
-const workplaceInputEditProfile = popupEditProfile.querySelector('#workplace-input-edit-profile');
+const formEditProfile = document.forms.editProfile;
+const nameInputEditProfile = formEditProfile.elements.name;
+const workplaceInputEditProfile = formEditProfile.elements.workplace;
 
 const popupAddElement = document.querySelector('#popup-add-element');
-const formAddElement = popupAddElement.querySelector('#form-add-element');
-const titleInputAddElement = popupAddElement.querySelector('#title-input-add-element');
-const urlInputAddElement = popupAddElement.querySelector('#url-input-add-element');
+const formAddElement = document.forms.addElement;
+const titleInputAddElement = formAddElement.elements.title;
+const urlInputAddElement = formAddElement.elements.url;
 
 const popupOpenImage = document.querySelector('#popup-open-image');
 const imageOpenImage = popupOpenImage.querySelector('#image-open-image');
@@ -172,6 +172,7 @@ const submitFormAddElement = (event) => {
   event.target.reset();
   elementsContainer.prepend(elementItem);
 
+  enableValidation();
   closePopup(popupAddElement);
 };
 
