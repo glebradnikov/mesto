@@ -1,25 +1,29 @@
 // Объявление переменных
 
-let profileEditButton = document.querySelector('.profile__edit');
+const profileEditButton = document.querySelector('.profile__edit');
 const profileName = document.querySelector('.profile__name');
 const profileWorkplace = document.querySelector('.profile__workplace');
 const profileAddButton = document.querySelector('.profile__add');
 
-const elementsList = document.querySelector('.elements__list');
+const elementsContainer = document.querySelector('.elements__list');
 
 const popups = document.querySelectorAll('.popup');
-const editProfilePopup = document.querySelector('#edit-profile-popup');
-const addElementPopup = document.querySelector('#add-element-popup');
-const imagePopup = document.querySelector('#image-popup');
-const closePopupButtons = document.querySelectorAll('.popup__close');
-const editProfilePopupForm = editProfilePopup.querySelector('#edit-profile-popup-form');
-const editProfilePopupInputName = editProfilePopup.querySelector('#edit-profile-popup-input-name');
-const editProfilePopupInputWorkplace = editProfilePopup.querySelector('#edit-profile-popup-input-workplace');
-const addElementPopupForm = addElementPopup.querySelector('#add-element-popup-form');
-const addElementPopupInputTitle = addElementPopup.querySelector('#add-element-input-title');
-const addElementPopupInputImage = addElementPopup.querySelector('#add-element-input-image');
-const imagePopupImage = imagePopup.querySelector('#image-popup-image');
-const imagePopupCaption = imagePopup.querySelector('#image-popup-caption');
+const popupCloseButtons = document.querySelectorAll('.popup__close');
+// const popupForm = document.querySelectorAll('.popup__form');
+
+const popupEditProfile = document.querySelector('#popup-edit-profile');
+const formEditProfile = popupEditProfile.querySelector('#form-edit-profile');
+const nameInputEditProfile = popupEditProfile.querySelector('#name-input-edit-profile');
+const workplaceInputEditProfile = popupEditProfile.querySelector('#workplace-input-edit-profile');
+
+const popupAddElement = document.querySelector('#popup-add-element');
+const formAddElement = popupAddElement.querySelector('#form-add-element');
+const titleInputAddElement = popupAddElement.querySelector('#title-input-add-element');
+const urlInputAddElement = popupAddElement.querySelector('#url-input-add-element');
+
+const popupOpenImage = document.querySelector('#popup-open-image');
+const imageOpenImage = popupOpenImage.querySelector('#image-open-image');
+const imageCaptionOpenImage = popupOpenImage.querySelector('#image-caption-open-image');
 
 const template = document.querySelector('.template');
 
@@ -28,7 +32,7 @@ const template = document.querySelector('.template');
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
 
-  document.addEventListener('mousedown', closePopupOverlay);
+  popup.addEventListener('mousedown', closePopupOverlay);
   document.addEventListener('keydown', closePopupEscape);
 };
 
@@ -37,152 +41,122 @@ const openPopup = (popup) => {
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 
-  document.removeEventListener('mousedown', closePopupOverlay);
+  popup.removeEventListener('mousedown', closePopupOverlay);
+  document.removeEventListener('keydown', closePopupEscape);
 };
 
-closePopupButtons.forEach((button) => {
-  const closePopupButton = button.closest('.popup');
+popupCloseButtons.forEach((button) => {
+  const popup = button.closest('.popup');
 
   button.addEventListener('click', () => {
-    closePopup(closePopupButton);
+    closePopup(popup);
   });
 });
 
 // Закрытие попапа кликом на оверлей
 
 const closePopupOverlay = (event) => {
-  closePopup(event.target);
+  if (event.target === event.currentTarget) {
+    closePopup(event.target);
+  }
 };
 
 // Закрытие попапа нажатием на Esc
 
 const closePopupEscape = (event) => {
-  const openedPopup = document.querySelector('.popup_opened');
-
   if (event.key === 'Escape') {
-    openedPopup.classList.remove('popup_opened');
+    const popupOpened = document.querySelector('.popup_opened');
 
-    document.removeEventListener('keydown', closePopupEscape);
+    closePopup(popupOpened);
   }
 };
 
 // Шесть карточек «из коробки»
 
-const initialElements = [
-  {
-    name: 'Сергиев Посад',
-    link: 'http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT2sYSBCbVPFgNXBYpLGqM-6C6PhmuN8UA8-v1RkkPY_AeN6eEhEoSw34Mni_6ys49g'
-  },
-  {
-    name: 'Переславль-Залесский',
-    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSpJDJF-65H9WAIWtbLyASLQd1gyhDVDRTRoW87xU-zonvstAbHmZaZ2ej5q6Hxv4CC'
-  },
-  {
-    name: 'Ростов',
-    link: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcSYXRn1yKNBefFGDE-9frz5ho_CFj71azeriOwyXIUiHoFujCg3DFBOTxqKsdwsMhBJ'
-  },
-  {
-    name: 'Ярославль',
-    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcQVHNx0mp2o8d1SqsaygMQRaT9gs_2jOv2UrnXVGQ60rbAyQFCeYGWTgPp81ryLO50y'
-  },
-  {
-    name: 'Кострома',
-    link: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Ipatiev02.jpg/1280px-Ipatiev02.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcQZNA0WIEbiKWwk1wMlQ_4L6Iz0l21P9KlQQsJ2R5mwatNicThwQuadMcX6mA8jtPf2'
-  },
-  {
-    name: 'Владимир',
-    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR3_4lzwSClrnXLzBchtnOLQd5tqqGjPz-IscBlPa8uinSlqxaCSH-7_kJazYGbXJBL'
-  }
-];
+const createElementItemNode = (name, link) => {
+  const elementItem = template.content.cloneNode(true);
+  const elementImage = elementItem.querySelector('.elements__image');
+  const elementTitle = elementItem.querySelector('.elements__title');
 
-const elementItemNode = (name, link) => {
-  const elementsItemNode = template.content.cloneNode(true);
-  const elementsImage = elementsItemNode.querySelector('.elements__image');
-  const elementsTitle = elementsItemNode.querySelector('.elements__title');
-
-  elementsImage.src = link;
-  elementsImage.alt = elementsTitle.textContent;
-  elementsTitle.textContent = name;
+  elementImage.src = link;
+  elementImage.setAttribute('alt', name);
+  elementTitle.textContent = name;
 
   // Лайк карточки
 
-  const elementsLikeButton = elementsItemNode.querySelector('.elements__like');
+  const elementLikeButton = elementItem.querySelector('.elements__like');
 
-  const activeElementsLikeButton = (event) => {
+  const handleElementLikeButton = (event) => {
     event.target.classList.toggle('elements__like_active');
   };
 
-  elementsLikeButton.addEventListener('click', activeElementsLikeButton);
+  elementLikeButton.addEventListener('click', handleElementLikeButton);
 
   // Удаление карточки
 
-  const elementsDeleteButton = elementsItemNode.querySelector('.elements__delete');
+  const elementDeleteButton = elementItem.querySelector('.elements__delete');
 
-  const deleteElementsItem = () => {
-    const elementsItem = elementsDeleteButton.closest('.elements__item');
+  const deleteElementItem = () => {
+    const elementItem = elementDeleteButton.closest('.elements__item');
 
-    elementsItem.remove();
+    elementItem.remove();
   };
 
-  elementsDeleteButton.addEventListener('click', deleteElementsItem);
+  elementDeleteButton.addEventListener('click', deleteElementItem);
 
   // Открытие попапа с картинкой
 
   // Открыть попап с картинкой
-  const openImagePopup = () => {
-    imagePopupImage.src = elementsImage.src;
-    imagePopupImage.alt = elementsImage.alt;
-    imagePopupCaption.textContent = elementsTitle.textContent;
+  const openPopupOpenImage = () => {
+    imageOpenImage.src = link;
+    imageOpenImage.setAttribute('alt', name);
+    imageCaptionOpenImage.textContent = name;
 
-    openPopup(imagePopup);
+    openPopup(popupOpenImage);
   };
 
-  elementsImage.addEventListener('click', openImagePopup);
+  elementImage.addEventListener('click', openPopupOpenImage);
 
-  return elementsItemNode;
+  return elementItem;
 };
 
 // Отобразить элементы
-const renderelementItemNode = () => {
-  initialElements.forEach((item) => {
-    const elementsItemNode = elementItemNode(item.name, item.link);
+const renderElementItemNode = () => {
+  intialElements.forEach((item) => {
+    const elementItemNode = createElementItemNode(item.name, item.link);
 
-    elementsList.append(elementsItemNode);
+    elementsContainer.append(elementItemNode);
   });
 };
 
-renderelementItemNode();
+renderElementItemNode();
 
 // Форма редактирования профиля
 
 // Открыть форму редактирования профиля
-const openEditProfilePopup = () => {
-  openPopup(editProfilePopup);
+const openPopupEditProfile = () => {
+  openPopup(popupEditProfile);
 };
 
-profileEditButton.addEventListener('click', openEditProfilePopup);
+profileEditButton.addEventListener('click', openPopupEditProfile);
 
 // Отправить форму редактирования профиля
-const editProfile = (event) => {
+const submitFormEditProfile = (event) => {
   event.preventDefault();
 
-  profileName.textContent = editProfilePopupInputName.value;
-  profileWorkplace.textContent = editProfilePopupInputWorkplace.value;
+  profileName.textContent = nameInputEditProfile.value;
+  profileWorkplace.textContent = workplaceInputEditProfile.value;
 
-  closePopup(editProfilePopup);
+  closePopup(popupEditProfile);
 };
 
-editProfilePopupForm.addEventListener('submit', editProfile);
+formEditProfile.addEventListener('submit', submitFormEditProfile);
 
 // Форма добавления карточки
 
 // Открыть форму добавления карточки
 const openAddElementPopup = () => {
-  openPopup(addElementPopup);
+  openPopup(popupAddElement);
 };
 
 profileAddButton.addEventListener('click', openAddElementPopup);
@@ -190,15 +164,15 @@ profileAddButton.addEventListener('click', openAddElementPopup);
 // Добавление карточки
 
 // Добавить карточку
-const addElementsItem = (event) => {
+const submitFormAddElement = (event) => {
   event.preventDefault();
 
-  const elementsContainer = elementItemNode(addElementPopupInputTitle.value, addElementPopupInputImage.value);
+  const elementItem = createElementItemNode(titleInputAddElement.value, urlInputAddElement.value);
 
   event.target.reset();
-  elementsList.prepend(elementsContainer);
+  elementsContainer.prepend(elementItem);
 
-  closePopup(addElementPopup);
+  closePopup(popupAddElement);
 };
 
-addElementPopupForm.addEventListener('submit', addElementsItem);
+formAddElement.addEventListener('submit', submitFormAddElement);

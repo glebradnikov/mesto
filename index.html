@@ -6,6 +6,7 @@
     <title>Mesto</title>
     <link rel="icon" href="favicon.png">
     <link rel="stylesheet" href="pages/index.css">
+    <script src="scripts/cards.js" defer></script>
     <script src="scripts/index.js" defer></script>
     <script src="scripts/validate.js" defer></script>
   </head>
@@ -42,27 +43,27 @@
       <p lang="en" class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
-    <div id="edit-profile-popup" class="popup">
+    <div id="popup-edit-profile" class="popup">
       <div class="popup__form-container">
         <button type="button" aria-label="Закрыть"
                 class="popup__close"></button>
-        <form name="edit" id="edit-profile-popup-form" class="popup__form"
+        <form name="edit-profile" id="form-edit-profile" class="popup__form"
               novalidate>
           <fieldset class="popup__fieldset">
             <legend class="popup__legend">Редактировать профиль</legend>
             <label class="popup__field">
               <input type="text" name="name" placeholder="Имя" minlength="2"
-                     maxlength="40" id="edit-profile-popup-input-name"
+                     maxlength="40" id="name-input-edit-profile"
                      class="popup__input" required>
-              <span id="edit-profile-popup-input-name-error"
+              <span id="name-input-edit-profile-error"
                     class="popup__error"></span>
             </label>
             <label class="popup__field">
               <input type="text" name="workplace" placeholder="Место работы"
                      minlength="2" maxlength="200"
-                     id="edit-profile-popup-input-workplace"
-                     class="popup__input" required>
-              <span id="edit-profile-popup-input-workplace-error"
+                     id="workplace-input-edit-profile" class="popup__input"
+                     required>
+              <span id="workplace-input-edit-profile-error"
                     class="popup__error"></span>
             </label>
             <button type="submit" class="popup__submit">Сохранить</button>
@@ -71,25 +72,25 @@
       </div>
     </div>
 
-    <div id="add-element-popup" class="popup">
+    <div id="popup-add-element" class="popup">
       <div class="popup__form-container">
         <button type="button" aria-label="Закрыть"
                 class="popup__close"></button>
-        <form name="edit" id="add-element-popup-form" class="popup__form"
+        <form name="add-element" id="form-add-element" class="popup__form"
               novalidate>
           <fieldset class="popup__fieldset">
             <legend class="popup__legend">Новое место</legend>
             <label class="popup__field">
               <input type="text" name="title" placeholder="Название"
-                     minlength="2" maxlength="30" id="add-element-input-title"
+                     minlength="2" maxlength="30" id="title-input-add-element"
                      class="popup__input" required>
-              <span id="add-element-input-title-error"
+              <span id="title-input-add-element-error"
                     class="popup__error"></span>
             </label>
             <label class="popup__field">
               <input type="url" name="image" placeholder="Ссылка на картинку"
-                     id="add-element-input-image" class="popup__input" required>
-              <span id="add-element-input-image-error"
+                     id="url-input-add-element" class="popup__input" required>
+              <span id="url-input-add-element-error"
                     class="popup__error"></span>
             </label>
             <button type="submit" class="popup__submit">Создать</button>
@@ -98,13 +99,13 @@
       </div>
     </div>
 
-    <div id="image-popup" class="popup popup_type_image">
+    <div id="popup-open-image" class="popup popup_type_image">
       <div class="popup__image-container">
         <button type="button" aria-label="Закрыть"
                 class="popup__close"></button>
         <figure class="popup__figure">
-          <img src="#" alt="" id="image-popup-image" class="popup__image">
-          <figcaption id="image-popup-caption" class="popup__caption">
+          <img src="#" alt="" id="image-open-image" class="popup__image">
+          <figcaption id="image-caption-open-image" class="popup__caption">
           </figcaption>
         </figure>
       </div>

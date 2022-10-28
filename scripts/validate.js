@@ -50,8 +50,8 @@ const setEventListeners = (form) => {
   const inputs = Array.from(form.querySelectorAll('.popup__input'));
   const button = form.querySelector('.popup__submit');
 
-  editProfilePopupInputName.value = profileName.textContent;
-  editProfilePopupInputWorkplace.value = profileWorkplace.textContent;
+  nameInputEditProfile.value = profileName.textContent;
+  workplaceInputEditProfile.value = profileWorkplace.textContent;
 
   toggleButtonState(inputs, button);
 
@@ -66,20 +66,18 @@ const setEventListeners = (form) => {
 // Добавление обработчиков всем формам
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-    });
-
-    setEventListeners(form);
+  formList.forEach((form, input, inputError, errorMessageActive, submitButton, submitButtonDisabled) => {
+    setEventListeners(form, input, inputError, errorMessageActive, submitButton, submitButtonDisabled);
   });
 };
 
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
 enableValidation({
-  popupForm: '.popup__form',
-  popupInput: '.popup__input',
-  popupInputError: 'popup__input_type_error',
-  popupSubmitButton: '.popup__submit',
-  popupSubmitButtonDisabled: 'popup__submit_disabled',
-  popupErrorMessage: 'popup__error'
+  form: '.popup__form',
+  input: '.popup__input',
+  inputError: 'popup__input_type_error',
+  errorMessageActive: 'popup__error_active',
+  submitButton: '.popup__submit',
+  submitButtonDisabled: 'popup__submit_disabled',
 });
