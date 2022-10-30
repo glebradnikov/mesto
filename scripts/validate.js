@@ -1,29 +1,38 @@
 // Валидация формы
 
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_active',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+};
+
 // Функция, которая добавляет класс с ошибкой
-const showError = (form, input, errorMessage) => {
+const showError = (form, input, error, settings) => {
   const inputError = form.querySelector(`#${input.id}-error`);
 
-  input.classList.add('popup__input_type_error');
-  inputError.textContent = errorMessage;
-  inputError.classList.add('popup__error_active');
+  input.classList.add(settings.inputErrorClass);
+  inputError.textContent = error;
+  inputError.classList.add(settings.errorClass);
 };
 
 // Функция, которая удаляет класс с ошибкой
-const hideError = (form, input) => {
+const hideError = (form, input, settings) => {
   const inputError = form.querySelector(`#${input.id}-error`);
 
-  input.classList.remove('popup__input_type_error');
-  inputError.classList.remove('popup__error_active');
+  input.classList.remove(settings.inputErrorClass);
+  inputError.classList.remove(settings.inputErrorClass);
   inputError.textContent = '';
 };
 
 // Функция, которая проверяет валидность поля
-const checkInputValidity = (form, input) => {
+const checkInputValidity = (form, input, settings) => {
   if (!input.validity.valid) {
-    showError(form, input, input.validationMessage);
+    showError(form, input, input.validationMessage, settings);
   } else {
-    hideError(form, input);
+    hideError(form, input, settings);
   }
 };
 
@@ -36,49 +45,41 @@ const hasInvalidInput = (inputs) => {
 
 // Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
-const toggleButtonState = (inputs, button) => {
+const toggleButtonState = (inputs, button, settings) => {
   if (hasInvalidInput(inputs)) {
-    button.classList.add('popup__submit_disabled');
+    button.classList.add(settings.inactiveButtonClass);
     button.setAttribute('disabled', '');
   } else {
-    button.classList.remove('popup__submit_disabled');
+    button.classList.remove(settings.inactiveButtonClass);
     button.removeAttribute('disabled');
   };
 };
 
-const setEventListeners = (form) => {
-  const inputs = Array.from(form.querySelectorAll('.popup__input'));
+const setEventListeners = (form, settings) => {
+  const inputs = Array.from(form.querySelectorAll(settings.inputSelector));
   const button = form.querySelector('.popup__submit');
 
-  nameInputEditProfile.value = profileName.textContent;
-  workplaceInputEditProfile.value = profileWorkplace.textContent;
-
-  toggleButtonState(inputs, button);
+  toggleButtonState(inputs, button, settings);
 
   inputs.forEach((input) => {
+    checkInputValidity(form, input, settings);
+
     input.addEventListener('input', () => {
-      checkInputValidity(form, input);
-      toggleButtonState(inputs, button);
+      checkInputValidity(form, input, settings);
+      toggleButtonState(inputs, button, settings);
     });
   });
 };
 
 // Добавление обработчиков всем формам
-const enableValidation = () => {
-  const formList = Array.from(popupForm);
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
 
-  formList.forEach((form, input, inputError, errorMessageActive, submitButton, submitButtonDisabled) => {
-    setEventListeners(form, input, inputError, errorMessageActive, submitButton, submitButtonDisabled);
+  formList.forEach((form) => {
+    setEventListeners(form, settings);
   });
 };
 
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
-enableValidation({
-  form: '.popup__form',
-  input: '.popup__input',
-  inputError: 'popup__input_type_error',
-  errorMessageActive: 'popup__error_active',
-  submitButton: '.popup__submit',
-  submitButtonDisabled: 'popup__submit_disabled',
-});
+// // включение валидации вызовом enableValidation
+// // все настройки передаются при вызове
+// enableValidation(settings);

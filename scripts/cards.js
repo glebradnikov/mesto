@@ -28,5 +28,5 @@ const intialElements = [
   {
     name: 'Владимир',
     link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR3_4lzwSClrnXLzBchtnOLQd5tqqGjPz-IscBlPa8uinSlqxaCSH-7_kJazYGbXJBL'
-  }
+  },
 ];

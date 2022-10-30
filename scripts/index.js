@@ -35,12 +35,10 @@ const openPopup = (popup) => {
   popup.addEventListener('mousedown', closePopupOverlay);
   document.addEventListener('keydown', closePopupEscape);
 };
-
 // Закрыть попап
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
-
   popup.removeEventListener('mousedown', closePopupOverlay);
   document.removeEventListener('keydown', closePopupEscape);
 };
@@ -135,6 +133,12 @@ renderElementItemNode();
 
 // Открыть форму редактирования профиля
 const openPopupEditProfile = () => {
+  nameInputEditProfile.value = profileName.textContent;
+  workplaceInputEditProfile.value = profileWorkplace.textContent;
+
+  // включение валидации вызовом enableValidation
+  // все настройки передаются при вызове
+  enableValidation(settings);
   openPopup(popupEditProfile);
 };
 
@@ -155,7 +159,22 @@ formEditProfile.addEventListener('submit', submitFormEditProfile);
 // Форма добавления карточки
 
 // Открыть форму добавления карточки
-const openAddElementPopup = () => {
+const openAddElementPopup = (event) => {
+  titleInputAddElement.value = '';
+  urlInputAddElement.value = '';
+
+  titleInputAddElement.classList.remove('popup__input_type_error');
+  urlInputAddElement.classList.remove('popup__input_type_error');
+
+  const popupError = document.querySelectorAll('.popup__error');
+
+  popupError.forEach((error) => {
+    error.classList.remove('popup__error_active');
+  });
+
+  // включение валидации вызовом enableValidation
+  // все настройки передаются при вызове
+  enableValidation(settings);
   openPopup(popupAddElement);
 };
 
@@ -172,7 +191,7 @@ const submitFormAddElement = (event) => {
   event.target.reset();
   elementsContainer.prepend(elementItem);
 
-  enableValidation();
+  enableValidation(settings);
   closePopup(popupAddElement);
 };
 
