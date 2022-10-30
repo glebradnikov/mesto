@@ -10,6 +10,8 @@ const elementsContainer = document.querySelector('.elements__list');
 const popups = document.querySelectorAll('.popup');
 const popupCloseButtons = document.querySelectorAll('.popup__close');
 const popupForm = document.forms;
+const popupInput = document.querySelectorAll('.popup__input');
+const popupError = document.querySelectorAll('.popup__error');
 
 const popupEditProfile = document.querySelector('#popup-edit-profile');
 const formEditProfile = document.forms.editProfile;
@@ -34,6 +36,14 @@ const openPopup = (popup) => {
 
   popup.addEventListener('mousedown', closePopupOverlay);
   document.addEventListener('keydown', closePopupEscape);
+
+  popupInput.forEach((inputError) => {
+    inputError.classList.remove('popup__input_type_error');
+  });
+
+  popupError.forEach((error) => {
+    error.classList.remove('popup__error_active');
+  });
 };
 // Закрыть попап
 
@@ -160,21 +170,8 @@ formEditProfile.addEventListener('submit', submitFormEditProfile);
 
 // Открыть форму добавления карточки
 const openAddElementPopup = (event) => {
-  // включение валидации вызовом enableValidation
-  // все настройки передаются при вызове
-  enableValidation(settings);
-
   titleInputAddElement.value = '';
   urlInputAddElement.value = '';
-
-  titleInputAddElement.classList.remove('popup__input_type_error');
-  urlInputAddElement.classList.remove('popup__input_type_error');
-
-  const popupError = document.querySelectorAll('.popup__error');
-
-  popupError.forEach((error) => {
-    error.classList.remove('popup__error_active');
-  });
 
   openPopup(popupAddElement);
 };
@@ -192,6 +189,8 @@ const submitFormAddElement = (event) => {
   event.target.reset();
   elementsContainer.prepend(elementItem);
 
+  // // включение валидации вызовом enableValidation
+  // // все настройки передаются при вызове
   enableValidation(settings);
   closePopup(popupAddElement);
 };

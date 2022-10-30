@@ -62,8 +62,6 @@ const setEventListeners = (form, settings) => {
   toggleButtonState(inputs, button, settings);
 
   inputs.forEach((input) => {
-    checkInputValidity(form, input, settings);
-
     input.addEventListener('input', () => {
       checkInputValidity(form, input, settings);
       toggleButtonState(inputs, button, settings);
@@ -82,4 +80,4 @@ const enableValidation = (settings) => {
 
 // // включение валидации вызовом enableValidation
 // // все настройки передаются при вызове
-// enableValidation(settings);
+enableValidation(settings);
