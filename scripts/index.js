@@ -160,6 +160,10 @@ formEditProfile.addEventListener('submit', submitFormEditProfile);
 
 // Открыть форму добавления карточки
 const openAddElementPopup = (event) => {
+  // включение валидации вызовом enableValidation
+  // все настройки передаются при вызове
+  enableValidation(settings);
+
   titleInputAddElement.value = '';
   urlInputAddElement.value = '';
 
@@ -172,9 +176,6 @@ const openAddElementPopup = (event) => {
     error.classList.remove('popup__error_active');
   });
 
-  // включение валидации вызовом enableValidation
-  // все настройки передаются при вызове
-  enableValidation(settings);
   openPopup(popupAddElement);
 };
 
