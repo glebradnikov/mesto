@@ -78,6 +78,6 @@ const enableValidation = (settings) => {
   });
 };
 
-// // включение валидации вызовом enableValidation
-// // все настройки передаются при вызове
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
 enableValidation(settings);

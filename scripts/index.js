@@ -12,14 +12,16 @@ const popupCloseButtons = document.querySelectorAll('.popup__close');
 const popupForm = document.forms;
 const popupInput = document.querySelectorAll('.popup__input');
 const popupError = document.querySelectorAll('.popup__error');
+const popupSubmitButtons = document.querySelectorAll('.popup__submit');
 
 const popupEditProfile = document.querySelector('#popup-edit-profile');
-const formEditProfile = document.forms.editProfile;
+const formEditProfile = popupForm.editProfile;
 const nameInputEditProfile = formEditProfile.elements.name;
 const workplaceInputEditProfile = formEditProfile.elements.workplace;
 
+
 const popupAddElement = document.querySelector('#popup-add-element');
-const formAddElement = document.forms.addElement;
+const formAddElement = popupForm.addElement;
 const titleInputAddElement = formAddElement.elements.title;
 const urlInputAddElement = formAddElement.elements.url;
 
@@ -49,6 +51,7 @@ const openPopup = (popup) => {
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+
   popup.removeEventListener('mousedown', closePopupOverlay);
   document.removeEventListener('keydown', closePopupEscape);
 };
@@ -146,9 +149,11 @@ const openPopupEditProfile = () => {
   nameInputEditProfile.value = profileName.textContent;
   workplaceInputEditProfile.value = profileWorkplace.textContent;
 
-  // включение валидации вызовом enableValidation
-  // все настройки передаются при вызове
-  enableValidation(settings);
+  popupSubmitButtons.forEach((button) => {
+    button.classList.remove('popup__submit_disabled');
+    button.removeAttribute('disabled');
+  });
+
   openPopup(popupEditProfile);
 };
 
@@ -169,9 +174,13 @@ formEditProfile.addEventListener('submit', submitFormEditProfile);
 // Форма добавления карточки
 
 // Открыть форму добавления карточки
-const openAddElementPopup = (event) => {
-  titleInputAddElement.value = '';
-  urlInputAddElement.value = '';
+const openAddElementPopup = () => {
+  formAddElement.reset();
+
+  popupSubmitButtons.forEach((button) => {
+    button.classList.add('popup__submit_disabled');
+    button.setAttribute('disabled', '');
+  });
 
   openPopup(popupAddElement);
 };
@@ -186,12 +195,14 @@ const submitFormAddElement = (event) => {
 
   const elementItem = createElementItemNode(titleInputAddElement.value, urlInputAddElement.value);
 
-  event.target.reset();
   elementsContainer.prepend(elementItem);
+  event.target.reset();
 
-  // // включение валидации вызовом enableValidation
-  // // все настройки передаются при вызове
-  enableValidation(settings);
+  popupSubmitButtons.forEach((button) => {
+    button.classList.add('popup__submit_disabled');
+    button.setAttribute('disabled', '');
+  });
+
   closePopup(popupAddElement);
 };
 
