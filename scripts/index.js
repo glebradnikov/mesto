@@ -19,11 +19,11 @@ const formEditProfile = popupForm.editProfile;
 const nameInputEditProfile = formEditProfile.elements.name;
 const workplaceInputEditProfile = formEditProfile.elements.workplace;
 
-
 const popupAddElement = document.querySelector('#popup-add-element');
 const formAddElement = popupForm.addElement;
 const titleInputAddElement = formAddElement.elements.title;
 const urlInputAddElement = formAddElement.elements.url;
+const submitButtonAddElement = formAddElement.elements.submitButtonAddElement;
 
 const popupOpenImage = document.querySelector('#popup-open-image');
 const imageOpenImage = popupOpenImage.querySelector('#image-open-image');
@@ -149,11 +149,6 @@ const openPopupEditProfile = () => {
   nameInputEditProfile.value = profileName.textContent;
   workplaceInputEditProfile.value = profileWorkplace.textContent;
 
-  popupSubmitButtons.forEach((button) => {
-    button.classList.remove('popup__submit_disabled');
-    button.removeAttribute('disabled');
-  });
-
   openPopup(popupEditProfile);
 };
 
@@ -177,10 +172,8 @@ formEditProfile.addEventListener('submit', submitFormEditProfile);
 const openAddElementPopup = () => {
   formAddElement.reset();
 
-  popupSubmitButtons.forEach((button) => {
-    button.classList.add('popup__submit_disabled');
-    button.setAttribute('disabled', '');
-  });
+  submitButtonAddElement.classList.add('popup__submit_disabled');
+  submitButtonAddElement.setAttribute('disabled', '');
 
   openPopup(popupAddElement);
 };
@@ -198,10 +191,8 @@ const submitFormAddElement = (event) => {
   elementsContainer.prepend(elementItem);
   event.target.reset();
 
-  popupSubmitButtons.forEach((button) => {
-    button.classList.add('popup__submit_disabled');
-    button.setAttribute('disabled', '');
-  });
+  submitButtonAddElement.classList.add('popup__submit_disabled');
+  submitButtonAddElement.setAttribute('disabled', '');
 
   closePopup(popupAddElement);
 };
