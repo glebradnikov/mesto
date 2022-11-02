@@ -12,12 +12,12 @@ const popupCloseButtons = document.querySelectorAll('.popup__close');
 const popupForm = document.forms;
 const popupInput = document.querySelectorAll('.popup__input');
 const popupError = document.querySelectorAll('.popup__error');
-const popupSubmitButtons = document.querySelectorAll('.popup__submit');
 
 const popupEditProfile = document.querySelector('#popup-edit-profile');
 const formEditProfile = popupForm.editProfile;
 const nameInputEditProfile = formEditProfile.elements.name;
 const workplaceInputEditProfile = formEditProfile.elements.workplace;
+const submitButtonEditProfile = formEditProfile.elements.submitButtonEditProfile;
 
 const popupAddElement = document.querySelector('#popup-add-element');
 const formAddElement = popupForm.addElement;
@@ -47,6 +47,7 @@ const openPopup = (popup) => {
     error.classList.remove('popup__error_active');
   });
 };
+
 // Закрыть попап
 
 const closePopup = (popup) => {
@@ -190,9 +191,6 @@ const submitFormAddElement = (event) => {
 
   elementsContainer.prepend(elementItem);
   event.target.reset();
-
-  submitButtonAddElement.classList.add('popup__submit_disabled');
-  submitButtonAddElement.setAttribute('disabled', '');
 
   closePopup(popupAddElement);
 };
