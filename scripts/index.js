@@ -37,7 +37,7 @@ const template = document.querySelector('.template');
 
 // Шесть карточек «из коробки»
 
-const intialElements = [
+const initialElements = [
   {
     name: 'Сергиев Посад',
     link: 'http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT2sYSBCbVPFgNXBYpLGqM-6C6PhmuN8UA8-v1RkkPY_AeN6eEhEoSw34Mni_6ys49g'
@@ -70,7 +70,7 @@ const intialElements = [
 
 // Элементы валидации
 
-const validationElements = {
+const validationConfig = {
   form: '.popup__form',
   input: '.popup__input',
   inputError: 'popup__input_type_error',
@@ -86,14 +86,6 @@ const openPopup = (popup) => {
 
   popup.addEventListener('mousedown', closePopupOverlay);
   document.addEventListener('keydown', closePopupEscape);
-
-  popupInput.forEach((inputError) => {
-    inputError.classList.remove('popup__input_type_error');
-  });
-
-  popupError.forEach((error) => {
-    error.classList.remove('popup__error_active');
-  });
 };
 
 // Закрыть попап
@@ -116,7 +108,7 @@ popupCloseButtons.forEach((button) => {
 // Закрытие попапа кликом на оверлей
 
 const closePopupOverlay = (event) => {
-  if (event.target === event.currentTarget) {
+  if (event.which === 1) {
     closePopup(event.target);
   }
 };
@@ -125,9 +117,9 @@ const closePopupOverlay = (event) => {
 
 const closePopupEscape = (event) => {
   if (event.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
+    const openedPopup = document.querySelector('.popup_opened');
 
-    closePopup(popupOpened);
+    closePopup(openedPopup);
   }
 };
 
@@ -137,6 +129,7 @@ const closePopupEscape = (event) => {
 const openPopupEditProfile = () => {
   nameInputEditProfile.value = profileName.textContent;
   workplaceInputEditProfile.value = profileWorkplace.textContent;
+  newFormValidatorEditProfile.hideAllErrors();
 
   openPopup(popupEditProfile);
 };
@@ -155,36 +148,6 @@ const submitFormEditProfile = (event) => {
 
 formEditProfile.addEventListener('submit', submitFormEditProfile);
 
-// Форма добавления карточки
-
-// Открыть форму добавления карточки
-const openAddElementPopup = () => {
-  formAddElement.reset();
-
-  submitButtonAddElement.classList.add('popup__submit_disabled');
-  submitButtonAddElement.setAttribute('disabled', '');
-
-  openPopup(popupAddElement);
-};
-
-profileAddButton.addEventListener('click', openAddElementPopup);
-
-// Добавление карточки
-
-const submitFormAddElement = (event) => {
-  event.preventDefault();
-
-  const newCard = new Card(event, '.template', openPopupOpenImage);
-  const card = newCard.generateCard();
-  elementsList.prepend(card);
-  elementsList.querySelector('.elements__title').textContent = titleInputAddElement.value;
-  elementsList.querySelector('.elements__image').src = urlInputAddElement.value;
-
-  closePopup(popupAddElement);
-};
-
-formAddElement.addEventListener('submit', submitFormAddElement);
-
 // Форма карточки
 
 // Открыть форму карточки
@@ -196,14 +159,46 @@ const openPopupOpenImage = (name, link) => {
   openPopup(popupOpenImage);
 };
 
-intialElements.forEach(item => {
-  const newCard = new Card(item, '.template', openPopupOpenImage);
+// Форма добавления карточки
+
+// Открыть форму добавления карточки
+const openAddElementPopup = () => {
+  formAddElement.reset();
+  newFormValidatorAddElement.hideAllErrors();
+
+  openPopup(popupAddElement);
+};
+
+profileAddButton.addEventListener('click', openAddElementPopup);
+
+const createCard = (name, link) => {
+  const newCard = new Card(name, link, '.template', openPopupOpenImage);
   const card = newCard.generateCard();
+
+  return card;
+};
+
+initialElements.forEach(initialElement => {
+  const card = createCard(initialElement.name, initialElement.link);
 
   elementsList.append(card);
 });
 
-popupForms.forEach((item) => {
-  const newFormValidatorEditProfile = new FormValidator(item, validationElements);
-  newFormValidatorEditProfile.enableValidation();
-});
+// Добавление карточки
+const submitFormAddElement = (event) => {
+  event.preventDefault();
+
+  const card = createCard(titleInputAddElement.value, urlInputAddElement.value);
+
+  elementsList.prepend(card);
+
+  closePopup(popupAddElement);
+};
+
+formAddElement.addEventListener('submit', submitFormAddElement);
+
+const newFormValidatorEditProfile = new FormValidator(formEditProfile, validationConfig);
+newFormValidatorEditProfile.enableValidation();
+
+const newFormValidatorAddElement = new FormValidator(formAddElement, validationConfig);
+newFormValidatorAddElement.enableValidation();

@@ -1,19 +1,19 @@
 export class Card {
-  constructor(initialElements, template, openPopupOpenImage) {
-    this._name = initialElements.name;
-    this._link = initialElements.link;
+  constructor(name, link, template, openPopupOpenImage) {
+    this._name = name;
+    this._link = link;
     this._template = template;
     this._openPopupOpenImage = openPopupOpenImage;
   }
 
   _setEventListeners() {
-    this._template.querySelector('.elements__image').addEventListener('click', () => {
-      this._openPopupOpenImage(this._template.querySelector('.elements__title').textContent, this._template.querySelector('.elements__image').src);
+    this._elementImage.addEventListener('click', () => {
+      this._openPopupOpenImage(this._name, this._link);
     });
 
-    this._template.querySelector('.elements__like').addEventListener('click', this._likeCard);
+    this._elementLike.addEventListener('click', this._likeCard);
 
-    this._template.querySelector('.elements__delete').addEventListener('click', () => {
+    this._elementDelete.addEventListener('click', () => {
       this._deleteCard();
     });
   }
@@ -28,13 +28,20 @@ export class Card {
   }
 
   generateCard() {
-    this._template = this._getTemplate();
-    this._template.querySelector('.elements__image').src = this._link;
-    this._template.querySelector('.elements__image').setAttribute('alt', this._name);
-    this._template.querySelector('.elements__title').textContent = this._name;
+    this._elementItem = this._getTemplate();
+
+    this._elementImage = this._elementItem.querySelector('.elements__image');
+    this._elementTitle = this._elementItem.querySelector('.elements__title');
+    this._elementLike = this._elementItem.querySelector('.elements__like');
+    this._elementDelete = this._elementItem.querySelector('.elements__delete');
+
+    this._elementImage.src = this._link;
+    this._elementImage.setAttribute('alt', this._name);
+    this._elementTitle.textContent = this._name;
+
     this._setEventListeners();
 
-    return this._template;
+    return this._elementItem;
   }
 
   _likeCard(event) {
@@ -42,6 +49,6 @@ export class Card {
   }
 
   _deleteCard() {
-    this._template.remove();
+    this._elementItem.remove();
   }
 }
