@@ -106,7 +106,7 @@ popupCloseButtons.forEach((button) => {
 // Закрытие попапа кликом на оверлей
 
 const closePopupOverlay = (event) => {
-  if (event.which === 1) {
+  if (event.target === event.currentTarget && event.which === 1) {
     closePopup(event.target);
   }
 };
@@ -122,6 +122,9 @@ const closePopupEscape = (event) => {
 };
 
 // Форма редактирования профиля
+
+const newFormValidatorEditProfile = new FormValidator(formEditProfile, validationConfig);
+newFormValidatorEditProfile.enableValidation();
 
 // Открыть форму редактирования профиля
 const openPopupEditProfile = () => {
@@ -159,6 +162,9 @@ const openPopupOpenImage = (name, link) => {
 
 // Форма добавления карточки
 
+const newFormValidatorAddElement = new FormValidator(formAddElement, validationConfig);
+newFormValidatorAddElement.enableValidation();
+
 // Открыть форму добавления карточки
 const openAddElementPopup = () => {
   formAddElement.reset();
@@ -173,11 +179,10 @@ const createCard = (name, link) => {
   const newCard = new Card(
     {
       name,
-      link
+      link,
     }, '.template', openPopupOpenImage);
-  const card = newCard.generateCard();
 
-  return card;
+  return newCard.generateCard();
 };
 
 initialElements.forEach(initialData => {
@@ -198,9 +203,3 @@ const submitFormAddElement = (event) => {
 };
 
 formAddElement.addEventListener('submit', submitFormAddElement);
-
-const newFormValidatorEditProfile = new FormValidator(formEditProfile, validationConfig);
-newFormValidatorEditProfile.enableValidation();
-
-const newFormValidatorAddElement = new FormValidator(formAddElement, validationConfig);
-newFormValidatorAddElement.enableValidation();
