@@ -1,5 +1,5 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 // Объявление переменных
 
@@ -172,14 +172,14 @@ const openAddElementPopup = () => {
 profileAddButton.addEventListener('click', openAddElementPopup);
 
 const createCard = (name, link) => {
-  const newCard = new Card(name, link, '.template', openPopupOpenImage);
+  const newCard = new Card({ name: name, link: link }, '.template', openPopupOpenImage);
   const card = newCard.generateCard();
 
   return card;
 };
 
-initialElements.forEach(initialElement => {
-  const card = createCard(initialElement.name, initialElement.link);
+initialElements.forEach(initialData => {
+  const card = createCard(initialData.name, initialData.link);
 
   elementsList.append(card);
 });
