@@ -33,8 +33,6 @@ const popupOpenImage = document.querySelector('#popup-open-image');
 const imageOpenImage = popupOpenImage.querySelector('#image-open-image');
 const imageCaptionOpenImage = popupOpenImage.querySelector('#image-caption-open-image');
 
-const template = document.querySelector('.template');
-
 // Шесть карточек «из коробки»
 
 const initialElements = [
@@ -172,7 +170,11 @@ const openAddElementPopup = () => {
 profileAddButton.addEventListener('click', openAddElementPopup);
 
 const createCard = (name, link) => {
-  const newCard = new Card({ name: name, link: link }, '.template', openPopupOpenImage);
+  const newCard = new Card(
+    {
+      name,
+      link
+    }, '.template', openPopupOpenImage);
   const card = newCard.generateCard();
 
   return card;
