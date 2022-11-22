@@ -1,5 +1,6 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 import {
   profileEditButton,
   profileName,
@@ -107,7 +108,7 @@ formEditProfile.addEventListener('submit', submitFormEditProfile);
 // Форма карточки
 
 // Открыть форму карточки
-const openPopupOpenImage = (name, link) => {
+export const openPopupOpenImage = (name, link) => {
   imageOpenImage.src = link;
   imageOpenImage.setAttribute('alt', name);
   imageCaptionOpenImage.textContent = name;
@@ -133,20 +134,24 @@ profileAddButton.addEventListener('click', openAddElementPopup);
 // Шесть карточек «из коробки»
 
 const createCard = (name, link) => {
-  const newCard = new Card(
+  const card = new Card(
     {
       name,
       link,
     }, '.template', openPopupOpenImage);
 
-  return newCard.generateCard();
+  return card.generateCard();
 };
 
-initialElements.forEach(initialData => {
-  const card = createCard(initialData.name, initialData.link);
+const initialElementsList = new Section({
+  render: (data) => {
+    const card = createCard(data.name, data.link);
 
-  elementsList.append(card);
-});
+    initialElementsList.setItem(card);
+  }
+}, elementsList);
+
+initialElementsList.renderItems(initialElements);
 
 // Добавление карточки
 const submitFormAddElement = (event) => {
