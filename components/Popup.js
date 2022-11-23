@@ -34,6 +34,6 @@ export default class Popup {
       if (event.target === event.currentTarget && event.which === 1) {
         this.close();
       }
-    })
+    });
   }
 }
