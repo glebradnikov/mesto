@@ -1,3 +1,4 @@
+import { popupCloseButtons } from '../utils/constants.js';
 export default class Popup {
   constructor(popup) {
     this._popup = popup;
@@ -23,6 +24,12 @@ export default class Popup {
   }
 
   setEventListeners() {
+    popupCloseButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        this.close();
+      });
+    });
+
     this._popup.addEventListener('mousedown', (event) => {
       if (event.target === event.currentTarget && event.which === 1) {
         this.close();

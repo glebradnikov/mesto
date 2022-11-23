@@ -8,7 +8,6 @@ import {
   profileWorkplace,
   profileAddButton,
   elementsList,
-  popupCloseButtons,
   popupEditProfile,
   formEditProfile,
   nameInputEditProfile,
@@ -23,16 +22,6 @@ import {
   initialElements,
   validationConfig
 } from '../utils/constants.js';
-
-popupCloseButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-
-  button.addEventListener('click', () => {
-    editProfilePopup.close();
-    addElementPopup.close();
-    openImagePopup.close();
-  });
-});
 
 // Форма редактирования профиля
 
