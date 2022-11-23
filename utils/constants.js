@@ -18,8 +18,6 @@ export const titleInputAddElement = formAddElement.elements.title;
 export const urlInputAddElement = formAddElement.elements.url;
 
 export const popupOpenImage = document.querySelector('#popup-open-image');
-export const imageOpenImage = popupOpenImage.querySelector('#image-open-image');
-export const imageCaptionOpenImage = popupOpenImage.querySelector('#image-caption-open-image');
 
 export const validationConfig = {
   form: '.popup__form',
