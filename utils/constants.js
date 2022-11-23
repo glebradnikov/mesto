@@ -21,6 +21,15 @@ export const popupOpenImage = document.querySelector('#popup-open-image');
 export const imageOpenImage = popupOpenImage.querySelector('#image-open-image');
 export const imageCaptionOpenImage = popupOpenImage.querySelector('#image-caption-open-image');
 
+export const validationConfig = {
+  form: '.popup__form',
+  input: '.popup__input',
+  inputError: 'popup__input_type_error',
+  error: 'popup__error_active',
+  submitButton: '.popup__submit',
+  submitButtonDisabled: 'popup__submit_disabled',
+};
+
 export const initialElements = [
   {
     name: 'Сергиев Посад',
