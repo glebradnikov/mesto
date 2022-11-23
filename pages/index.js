@@ -76,7 +76,7 @@ profileAddButton.addEventListener('click', () => {
 const openImagePopup = new PopupWithImage(popupOpenImage);
 openImagePopup.setEventListeners();
 
-const openPopupOpenImage = (name, link) => {
+const handleCardClick = (name, link) => {
   openImagePopup.open(name, link);
 };
 
@@ -87,7 +87,7 @@ const createCard = (name, link) => {
     {
       name,
       link,
-    }, '.template', openPopupOpenImage);
+    }, '.template', handleCardClick);
 
   return card.generateCard();
 };
