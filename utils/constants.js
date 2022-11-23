@@ -25,7 +25,7 @@ export const validationConfig = {
   inputError: 'popup__input_type_error',
   error: 'popup__error_active',
   submitButton: '.popup__submit',
-  submitButtonDisabled: 'popup__submit_disabled',
+  submitButtonDisabled: 'popup__submit_disabled'
 };
 
 export const initialElements = [
@@ -56,5 +56,5 @@ export const initialElements = [
   {
     name: 'Владимир',
     link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR3_4lzwSClrnXLzBchtnOLQd5tqqGjPz-IscBlPa8uinSlqxaCSH-7_kJazYGbXJBL'
-  },
+  }
 ];

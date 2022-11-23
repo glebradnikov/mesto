@@ -1,4 +1,5 @@
 import { popupCloseButtons } from '../utils/constants.js';
+
 export default class Popup {
   constructor(popup) {
     this._popup = popup;
@@ -14,7 +15,6 @@ export default class Popup {
     this._popup.classList.remove('popup_opened');
 
     document.addEventListener('keydown', this._handleEscClose.bind(this));
-
   }
 
   _handleEscClose(event) {

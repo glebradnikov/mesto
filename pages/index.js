@@ -3,6 +3,7 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
 import {
   profileEditButton,
   profileName,
@@ -24,79 +25,60 @@ import {
 
 // Форма редактирования профиля
 
+const userInfo = new UserInfo({
+  name: '.profile__name',
+  workplace: '.profile__workplace'
+});
+
 const editProfileFormValidator = new FormValidator(formEditProfile, validationConfig);
 editProfileFormValidator.enableValidation();
 
 const editProfilePopupWithForm = new PopupWithForm(popupEditProfile, () => {
+  userInfo.setUserInfo({
+    name: nameInputEditProfile.value,
+    workplace: workplaceInputEditProfile.value
+  });
   editProfilePopupWithForm.close();
 });
 editProfilePopupWithForm.setEventListeners();
 
 // Открыть форму редактирования профиля
-const openPopupEditProfile = () => {
-  nameInputEditProfile.value = profileName.textContent;
-  workplaceInputEditProfile.value = profileWorkplace.textContent;
+profileEditButton.addEventListener('click', () => {
+  nameInputEditProfile.value = userInfo.getUserInfo().name;
+  workplaceInputEditProfile.value = userInfo.getUserInfo().workplace;
 
   editProfileFormValidator.hideAllErrors();
   editProfilePopupWithForm.open();
-};
-
-profileEditButton.addEventListener('click', openPopupEditProfile);
-
-// Отправить форму редактирования профиля
-const submitFormEditProfile = (event) => {
-  event.preventDefault();
-
-  profileName.textContent = nameInputEditProfile.value;
-  profileWorkplace.textContent = workplaceInputEditProfile.value;
-
-  editProfilePopupWithForm.close();
-};
-
-formEditProfile.addEventListener('submit', submitFormEditProfile);
+});
 
 // Форма добавления карточки
-
-// Открыть форму добавления карточки
-const openAddElementPopup = () => {
-  formAddElement.reset();
-  addElementFormValidator.hideAllErrors();
-
-  addElementPopupWithForm.open();
-};
-
-profileAddButton.addEventListener('click', openAddElementPopup);
-
-// Добавление карточки
-const submitFormAddElement = (event) => {
-  event.preventDefault();
-
-  const card = createCard(titleInputAddElement.value, urlInputAddElement.value);
-
-  elementsList.prepend(card);
-
-  addElementPopupWithForm.close();
-};
-
-formAddElement.addEventListener('submit', submitFormAddElement);
 
 const addElementFormValidator = new FormValidator(formAddElement, validationConfig);
 addElementFormValidator.enableValidation();
 
 const addElementPopupWithForm = new PopupWithForm(popupAddElement, () => {
+  const card = createCard(titleInputAddElement.value, urlInputAddElement.value);
+
+  elementsList.prepend(card);
   addElementPopupWithForm.close();
 });
 addElementPopupWithForm.setEventListeners();
 
+// Открыть форму добавления карточки
+profileAddButton.addEventListener('click', () => {
+  addElementFormValidator.hideAllErrors();
+  addElementPopupWithForm.open();
+});
+
 // Форма карточки
 
 // Открыть форму карточки
+const openImagePopup = new PopupWithImage(popupOpenImage);
+openImagePopup.setEventListeners();
+
 const openPopupOpenImage = (name, link) => {
   openImagePopup.open(name, link);
 };
-
-const openImagePopup = new PopupWithImage(popupOpenImage);
-openImagePopup.setEventListeners();
 
 // Шесть карточек «из коробки»
 
