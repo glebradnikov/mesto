@@ -1,14 +1,14 @@
 export default class Card {
-  constructor(data, template, openPopupOpenImage) {
-    this._name = data.name;
-    this._link = data.link;
+  constructor(cardData, template, openPopupImage) {
+    this._title = cardData.title;
+    this._link = cardData.link;
     this._template = template;
-    this._openPopupOpenImage = openPopupOpenImage;
+    this._openPopupImage = openPopupImage;
   }
 
   _setEventListeners() {
     this._elementImage.addEventListener('click', () => {
-      this._openPopupOpenImage(this._name, this._link);
+      this._openPopupImage(this._title, this._link);
     });
 
     this._elementLike.addEventListener('click', this._likeCard);
@@ -36,8 +36,8 @@ export default class Card {
     this._elementDelete = this._elementItem.querySelector('.elements__delete');
 
     this._elementImage.src = this._link;
-    this._elementImage.setAttribute('alt', this._name);
-    this._elementTitle.textContent = this._name;
+    this._elementImage.setAttribute('alt', this._title);
+    this._elementTitle.textContent = this._title;
 
     this._setEventListeners();
 

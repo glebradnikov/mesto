@@ -5,99 +5,100 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import {
-  profileEditButton,
   profileName,
   profileWorkplace,
+  profileEditButton,
   profileAddButton,
-  elementsList,
+  cardList,
   popupEditProfile,
   formEditProfile,
-  nameInputEditProfile,
-  workplaceInputEditProfile,
-  popupAddElement,
-  formAddElement,
-  titleInputAddElement,
-  urlInputAddElement,
-  popupOpenImage,
-  initialElements,
-  validationConfig
+  nameEditProfile,
+  workplaceEditProfile,
+  popupAddCard,
+  formAddCard,
+  titleAddCard,
+  linkAddCard,
+  popupImage,
+  cardData,
+  validationData
 } from '../utils/constants.js';
 
 // Форма редактирования профиля
 
-const userInfo = new UserInfo({
-  name: '.profile__name',
-  workplace: '.profile__workplace'
-});
+const formValidatorEditProfile = new FormValidator(formEditProfile, validationData);
+formValidatorEditProfile.enableValidation();
 
-const editProfileFormValidator = new FormValidator(formEditProfile, validationConfig);
-editProfileFormValidator.enableValidation();
-
-const editProfilePopupWithForm = new PopupWithForm(popupEditProfile, () => {
+const popupWithFormEditProfile = new PopupWithForm(popupEditProfile, () => {
   userInfo.setUserInfo({
-    name: nameInputEditProfile.value,
-    workplace: workplaceInputEditProfile.value
+    name: nameEditProfile.value,
+    workplace: workplaceEditProfile.value
   });
-  editProfilePopupWithForm.close();
+  popupWithFormEditProfile.close();
 });
-editProfilePopupWithForm.setEventListeners();
+popupWithFormEditProfile.setEventListeners();
+
+const userInfo = new UserInfo({
+  name: profileName,
+  workplace: profileWorkplace
+});
 
 // Открыть форму редактирования профиля
 profileEditButton.addEventListener('click', () => {
-  nameInputEditProfile.value = userInfo.getUserInfo().name;
-  workplaceInputEditProfile.value = userInfo.getUserInfo().workplace;
+  nameEditProfile.value = userInfo.getUserInfo().name;
+  workplaceEditProfile.value = userInfo.getUserInfo().workplace;
 
-  editProfileFormValidator.hideAllErrors();
-  editProfilePopupWithForm.open();
+  formValidatorEditProfile.hideAllErrors();
+  popupWithFormEditProfile.open();
 });
 
 // Форма добавления карточки
 
-const addElementFormValidator = new FormValidator(formAddElement, validationConfig);
-addElementFormValidator.enableValidation();
+const formValidatorAddCard = new FormValidator(formAddCard, validationData);
+formValidatorAddCard.enableValidation();
 
-const addElementPopupWithForm = new PopupWithForm(popupAddElement, () => {
-  const card = createCard(titleInputAddElement.value, urlInputAddElement.value);
+const popupWithFormAddCard = new PopupWithForm(popupAddCard, () => {
+  const card = createCard(titleAddCard.value, linkAddCard.value);
 
-  elementsList.prepend(card);
-  addElementPopupWithForm.close();
+  cardList.prepend(card);
+  popupWithFormAddCard.close();
 });
-addElementPopupWithForm.setEventListeners();
+popupWithFormAddCard.setEventListeners();
 
 // Открыть форму добавления карточки
 profileAddButton.addEventListener('click', () => {
-  addElementFormValidator.hideAllErrors();
-  addElementPopupWithForm.open();
+  formValidatorAddCard.hideAllErrors();
+  popupWithFormAddCard.open();
 });
 
 // Форма карточки
 
-// Открыть форму карточки
-const openImagePopup = new PopupWithImage(popupOpenImage);
-openImagePopup.setEventListeners();
+const popupWithImage = new PopupWithImage(popupImage);
+popupWithImage.setEventListeners();
 
-const handleCardClick = (name, link) => {
-  openImagePopup.open(name, link);
+// Открыть форму карточки
+
+const openPopupImage = (title, link) => {
+  popupWithImage.open(title, link);
 };
 
 // Шесть карточек «из коробки»
 
-const createCard = (name, link) => {
+const createCard = (title, link) => {
   const card = new Card(
     {
-      name,
+      title,
       link,
-    }, '.template', handleCardClick);
+    }, '.template', openPopupImage);
 
   return card.generateCard();
 };
 
-const initialElementsList = new Section({
-  render: (data) => {
-    const card = createCard(data.name, data.link);
+const initialCardList = new Section({
+  renderer: (cardData) => {
+    const card = createCard(cardData.title, cardData.link);
 
-    initialElementsList.setItem(card);
+    initialCardList.setItem(card);
   }
-}, elementsList);
+}, cardList);
 
-initialElementsList.renderItems(initialElements);
+initialCardList.renderItems(cardData);
