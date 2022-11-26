@@ -4,14 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mesto</title>
-    <link rel="icon" href="favicon.png">
-    <link rel="stylesheet" href="pages/index.css">
-    <script type="module" src="pages/index.js"></script>
+    <link rel="icon" href="<%=require('./favicon.png')%>">
   </head>
   <body class="page">
     <header class="header">
       <a href="#" class="header__link">
-        <img src="images/header-logo.svg" alt="Mesto Russia" lang="en"
+        <img src="<%=require('./images/header-logo.svg')%>" alt="Mesto Russia" lang="en"
              class="header__logo">
       </a>
     </header>
@@ -19,7 +17,7 @@
     <main class="main">
       <section class="profile">
         <div class="profile__content">
-          <img src="images/profile-avatar.jpg" alt="Аватар"
+          <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар"
                class="profile__avatar">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
