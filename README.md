@@ -1,5 +1,5 @@
 # Mesto Russia
-![Логотип](https://github.com/glebradnikov/mesto/blob/main/favicon.png)
+![Логотип](https://github.com/glebradnikov/mesto/blob/main/src/favicon.png)
 
 [Cайт работает по адресу](https://glebradnikov.github.io/mesto)
 
