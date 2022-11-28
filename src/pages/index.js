@@ -40,11 +40,12 @@ const userInfo = new UserInfo({
   name: profileName,
   workplace: profileWorkplace
 });
-const userInfoData = userInfo.getUserInfo();
 
 // Открыть форму редактирования профиля
 
 const openPopupEditProfile = () => {
+  const userInfoData = userInfo.getUserInfo();
+
   nameEditProfile.value = userInfoData.name;
   workplaceEditProfile.value = userInfoData.workplace;
 
@@ -59,8 +60,8 @@ profileEditButton.addEventListener('click', openPopupEditProfile);
 const formValidatorAddCard = new FormValidator(formAddCard, validationConfig);
 formValidatorAddCard.enableValidation();
 
-const popupWithFormAddCard = new PopupWithForm(popupAddCard, () => {
-  const card = createCard(titleAddCard.value, linkAddCard.value);
+const popupWithFormAddCard = new PopupWithForm(popupAddCard, (cardsData) => {
+  const card = createCard(cardsData);
 
   cardsSection.setItem(card);
   popupWithFormAddCard.close();
@@ -85,7 +86,7 @@ const openPopupImage = (data) => {
   popupWithImage.open(data);
 };
 
-// Шесть карточек «из коробки»  
+// Шесть карточек «из коробки»
 
 const createCard = (cardsData) => {
   const card = new Card(cardsData, '.template', openPopupImage);
