@@ -3,7 +3,7 @@ export const profileWorkplace = document.querySelector('.profile__workplace');
 export const profileEditButton = document.querySelector('.profile__edit');
 export const profileAddButton = document.querySelector('.profile__add');
 
-export const cardList = document.querySelector('.elements__list');
+export const cardContainer = document.querySelector('.elements__list');
 
 export const popupEditProfile = document.querySelector('#popup-edit-profile');
 export const formEditProfile = document.forms.editProfile;
@@ -17,7 +17,7 @@ export const linkAddCard = formAddCard.elements.link;
 
 export const popupImage = document.querySelector('#popup-image');
 
-export const cardData = [
+export const cardsData = [
   {
     title: 'Сергиев Посад',
     link: 'http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT2sYSBCbVPFgNXBYpLGqM-6C6PhmuN8UA8-v1RkkPY_AeN6eEhEoSw34Mni_6ys49g'
@@ -48,7 +48,7 @@ export const cardData = [
   }
 ];
 
-export const validationData = {
+export const validationConfig = {
   form: '.popup__form',
   input: '.popup__input',
   inputError: 'popup__input_type_error',

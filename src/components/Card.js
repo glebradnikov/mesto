@@ -1,14 +1,17 @@
 export default class Card {
-  constructor(cardData, template, openPopupImage) {
-    this._title = cardData.title;
-    this._link = cardData.link;
+  constructor(cardsData, template, handleCardClick) {
+    this._title = cardsData.title;
+    this._link = cardsData.link;
     this._template = template;
-    this._openPopupImage = openPopupImage;
+    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
     this._elementImage.addEventListener('click', () => {
-      this._openPopupImage(this._title, this._link);
+      this._handleCardClick({
+        title: this._title,
+        link: this._link
+      });
     });
 
     this._elementLike.addEventListener('click', this._likeCard);
@@ -36,7 +39,7 @@ export default class Card {
     this._elementDelete = this._elementItem.querySelector('.elements__delete');
 
     this._elementImage.src = this._link;
-    this._elementImage.setAttribute('alt', this._title);
+    this._elementImage.alt = this._title;
     this._elementTitle.textContent = this._title;
 
     this._setEventListeners();
@@ -50,5 +53,6 @@ export default class Card {
 
   _deleteCard() {
     this._elementItem.remove();
+    this._elementItem = null;
   }
 }
