@@ -1,7 +1,7 @@
 export default class Section {
-  constructor({ renderer }, dataList) {
+  constructor({ renderer }, container) {
     this._renderer = renderer;
-    this._dataList = dataList;
+    this._container = container;
   }
 
   renderItems(dataList) {
@@ -11,6 +11,6 @@ export default class Section {
   }
 
   setItem(card) {
-    this._dataList.prepend(card);
+    this._container.prepend(card);
   }
 }

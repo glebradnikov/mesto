@@ -60,8 +60,8 @@ profileEditButton.addEventListener('click', openPopupEditProfile);
 const formValidatorAddCard = new FormValidator(formAddCard, validationConfig);
 formValidatorAddCard.enableValidation();
 
-const popupWithFormAddCard = new PopupWithForm(popupAddCard, (cardsData) => {
-  const card = createCard(cardsData);
+const popupWithFormAddCard = new PopupWithForm(popupAddCard, (cardData) => {
+  const card = createCard(cardData);
 
   cardsSection.setItem(card);
   popupWithFormAddCard.close();
@@ -88,15 +88,15 @@ const openPopupImage = (data) => {
 
 // Шесть карточек «из коробки»
 
-const createCard = (cardsData) => {
-  const card = new Card(cardsData, '.template', openPopupImage);
+const createCard = (cardData) => {
+  const card = new Card(cardData, '.template', openPopupImage);
 
   return card.generateCard();
 };
 
 const cardsSection = new Section({
-  renderer: (cardsData) => {
-    const card = createCard(cardsData);
+  renderer: (cardData) => {
+    const card = createCard(cardData);
 
     cardsSection.setItem(card);
   }

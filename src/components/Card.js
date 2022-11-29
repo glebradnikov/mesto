@@ -27,6 +27,7 @@ export default class Card {
       .content
       .querySelector('.elements__item')
       .cloneNode(true);
+
     return template;
   }
 
