@@ -9,20 +9,24 @@
   <body class="page">
     <header class="header">
       <a href="#" class="header__link">
-        <img src="<%=require('./images/header-logo.svg')%>" alt="Mesto Russia" lang="en"
-             class="header__logo">
+        <img src="<%=require('./images/header-logo.svg')%>" alt="Mesto Russia"
+             lang="en" class="header__logo">
       </a>
     </header>
 
     <main class="main">
       <section class="profile">
         <div class="profile__content">
-          <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар"
-               class="profile__avatar">
+          <div class="profile__avatar">
+            <button id="edit-avatar-button" type="button"
+                    aria-label="Редактировать"
+                    class="profile__edit profile__edit_type_avatar"></button>
+            <img src="#" alt="Аватар" class="profile__image">
+          </div>
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" aria-label="Редактировать"
-                    class="profile__edit"></button>
+            <button id="edit-profile-button" type="button"
+                    aria-label="Редактировать" class="profile__edit"></button>
             <p class="profile__workplace">Исследователь океана</p>
           </div>
         </div>
@@ -55,14 +59,15 @@
                     class="popup__error"></span>
             </label>
             <label class="popup__field">
-              <input type="text" name="workplace" placeholder="Место работы"
+              <input type="text" name="about" placeholder="Место работы"
                      minlength="2" maxlength="200"
                      id="workplace-input-edit-profile" class="popup__input"
                      required>
               <span id="workplace-input-edit-profile-error"
                     class="popup__error"></span>
             </label>
-            <button type="submit" class="popup__submit">Сохранить</button>
+            <button type="submit" name="submit"
+                    class="popup__submit">Сохранить</button>
           </fieldset>
         </form>
       </div>
@@ -89,8 +94,7 @@
               <span id="url-input-add-element-error"
                     class="popup__error"></span>
             </label>
-            <button type="submit" name="submitButtonAddElement"
-                    class="popup__submit">Создать</button>
+            <button type="submit" class="popup__submit">Создать</button>
           </fieldset>
         </form>
       </div>
@@ -108,14 +112,51 @@
       </div>
     </div>
 
+    <div id="popup-confirm" class="popup">
+      <div class="popup__form-container">
+        <button type="button" aria-label="Закрыть"
+                class="popup__close"></button>
+        <form name="confirm" id="form-confirm" class="popup__form" novalidate>
+          <fieldset class="popup__fieldset">
+            <legend class="popup__legend popup__legend_type_confirm">Вы уверены?
+            </legend>
+            <button type="submit" class="popup__submit">Да</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div id="popup-avatar" class="popup">
+      <div class="popup__form-container">
+        <button type="button" aria-label="Закрыть"
+                class="popup__close"></button>
+        <form name="avatar" id="form-avatar" class="popup__form" novalidate>
+          <fieldset class="popup__fieldset">
+            <legend class="popup__legend">Обновить
+              аватар
+            </legend>
+            <label class="popup__field">
+              <input type="url" name="avatar" placeholder="Ссылка на картинку"
+                     id="url-input-avatar" class="popup__input" required>
+              <span id="url-input-avatar-error" class="popup__error"></span>
+            </label>
+            <button type="submit" class="popup__submit">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
     <template class="template">
       <li class="elements__item">
         <div class="elements__delete"></div>
         <img src="#" alt="" class="elements__image">
         <div class="elements__content">
           <h2 class="elements__title"></h2>
-          <button type="button" aria-label="Нравится"
-                  class="elements__like"></button>
+          <div class="elements__like-container">
+            <button type="button" aria-label="Нравится"
+                    class="elements__like"></button>
+            <p class="elements__like-counter">0</p>
+          </div>
         </div>
         <span class="elements__hover"></span>
       </li>

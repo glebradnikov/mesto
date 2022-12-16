@@ -1,6 +1,8 @@
+export const profileAvatarButton = document.querySelector('#edit-avatar-button');
+export const profileImage = document.querySelector('.profile__image');
 export const profileName = document.querySelector('.profile__name');
-export const profileWorkplace = document.querySelector('.profile__workplace');
-export const profileEditButton = document.querySelector('.profile__edit');
+export const profileAbout = document.querySelector('.profile__workplace');
+export const profileEditButton = document.querySelector('#edit-profile-button');
 export const profileAddButton = document.querySelector('.profile__add');
 
 export const cardContainer = document.querySelector('.elements__list');
@@ -8,45 +10,26 @@ export const cardContainer = document.querySelector('.elements__list');
 export const popupEditProfile = document.querySelector('#popup-edit-profile');
 export const formEditProfile = document.forms.editProfile;
 export const nameEditProfile = formEditProfile.elements.name;
-export const workplaceEditProfile = formEditProfile.elements.workplace;
+export const aboutEditProfile = formEditProfile.elements.about;
+
 
 export const popupAddCard = document.querySelector('#popup-add-card');
 export const formAddCard = document.forms.addElement;
-export const titleAddCard = formAddCard.elements.title;
-export const linkAddCard = formAddCard.elements.link;
 
 export const popupImage = document.querySelector('#popup-image');
 
-export const cardsData = [
-  {
-    title: 'Сергиев Посад',
-    link: 'http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT2sYSBCbVPFgNXBYpLGqM-6C6PhmuN8UA8-v1RkkPY_AeN6eEhEoSw34Mni_6ys49g'
-  },
-  {
-    title: 'Переславль-Залесский',
-    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSpJDJF-65H9WAIWtbLyASLQd1gyhDVDRTRoW87xU-zonvstAbHmZaZ2ej5q6Hxv4CC'
-  },
-  {
-    title: 'Ростов',
-    link: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcSYXRn1yKNBefFGDE-9frz5ho_CFj71azeriOwyXIUiHoFujCg3DFBOTxqKsdwsMhBJ'
-  },
-  {
-    title: 'Ярославль',
-    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcQVHNx0mp2o8d1SqsaygMQRaT9gs_2jOv2UrnXVGQ60rbAyQFCeYGWTgPp81ryLO50y'
-  },
-  {
-    title: 'Кострома',
-    link: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Ipatiev02.jpg/1280px-Ipatiev02.jpg'
-  },
-  {
-    title: 'Иваново',
-    link: 'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcQZNA0WIEbiKWwk1wMlQ_4L6Iz0l21P9KlQQsJ2R5mwatNicThwQuadMcX6mA8jtPf2'
-  },
-  {
-    title: 'Владимир',
-    link: 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR3_4lzwSClrnXLzBchtnOLQd5tqqGjPz-IscBlPa8uinSlqxaCSH-7_kJazYGbXJBL'
+export const popupConfirm = document.querySelector('#popup-confirm');
+
+export const popupAvatar = document.querySelector('#popup-avatar');
+export const formAvatar = document.forms.avatar;
+
+export const apiConfig = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-55',
+  headers: {
+    authorization: 'e00a1ab1-46c1-4239-9ab0-198fbc69965a',
+    'Content-Type': 'application/json'
   }
-];
+};
 
 export const validationConfig = {
   form: '.popup__form',

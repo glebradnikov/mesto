@@ -10,17 +10,6 @@ export default class FormValidator {
     this._submitButtonElement = this._form.querySelector(this._submitButton);
   }
 
-  _setEventListeners() {
-    this._toggleButtonState();
-
-    this._inputList.forEach((input) => {
-      input.addEventListener('input', () => {
-        this._checkInputValidity(input);
-        this._toggleButtonState();
-      });
-    });
-  };
-
   _showError(input) {
     this._inputErrorMessage = this._form.querySelector(`#${input.id}-error`);
 
@@ -60,6 +49,17 @@ export default class FormValidator {
       this._submitButtonElement.disabled = false;
     };
   };
+
+  _setEventListeners() {
+    this._toggleButtonState();
+
+    this._inputList.forEach((input) => {
+      input.addEventListener('input', () => {
+        this._checkInputValidity(input);
+        this._toggleButtonState();
+      });
+    });
+  }
 
   hideAllErrors() {
     this._toggleButtonState();
