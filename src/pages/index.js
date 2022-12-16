@@ -63,17 +63,6 @@ profileAvatarButton.addEventListener('click', openPopupAvatar);
 
 // Форма редактирования профиля
 
-api.getUserInfo()
-  .then((result) => {
-    userId = result._id;
-    profileImage.src = result.avatar;
-    profileName.textContent = result.name;
-    profileAbout.textContent = result.about;
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
 const userInfo = new UserInfo({
   avatar: profileImage,
   name: profileName,
@@ -212,9 +201,13 @@ const cardsSection = new Section({
   }
 }, cardContainer);
 
-api.getCards()
-  .then((result) => {
-    cardsSection.renderItems(result.reverse());
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([data, cards]) => {
+    userId = data._id;
+
+    userInfo.setUserInfo(data);
+    userInfo.setAvatar(data);
+    cardsSection.renderItems(cards.reverse());
   })
   .catch((error) => {
     console.log(error);
