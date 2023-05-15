@@ -41,7 +41,8 @@ const formValidatorAvatar = new FormValidator(formAvatar, validationConfig);
 formValidatorAvatar.enableValidation();
 
 const popupWithFormAvatar = new PopupWithForm(popupAvatar, (data) => {
-  api.editAvatar(data)
+  api
+    .editAvatar(data)
     .then(() => {
       userInfo.setAvatar(data);
       popupWithFormAvatar.close();
@@ -66,15 +67,19 @@ profileAvatarButton.addEventListener('click', openPopupAvatar);
 const userInfo = new UserInfo({
   avatar: profileImage,
   name: profileName,
-  about: profileAbout
+  about: profileAbout,
 });
 
-const formValidatorEditProfile = new FormValidator(formEditProfile, validationConfig);
+const formValidatorEditProfile = new FormValidator(
+  formEditProfile,
+  validationConfig
+);
 
 formValidatorEditProfile.enableValidation();
 
 const popupWithFormEditProfile = new PopupWithForm(popupEditProfile, (data) => {
-  api.editUserInfo(data)
+  api
+    .editUserInfo(data)
     .then(() => {
       userInfo.setUserInfo(data);
       popupWithFormEditProfile.close();
@@ -106,7 +111,8 @@ const formValidatorAddCard = new FormValidator(formAddCard, validationConfig);
 formValidatorAddCard.enableValidation();
 
 const popupWithFormAddCard = new PopupWithForm(popupAddCard, (data) => {
-  api.addCard(data)
+  api
+    .addCard(data)
     .then((result) => {
       const card = createCard(result);
 
@@ -157,7 +163,8 @@ const createCard = (data) => {
       popupWithConfirm.open(data);
 
       popupWithConfirm.submitHandler(() => {
-        api.deleteCard(data._id)
+        api
+          .deleteCard(data._id)
           .then(() => {
             card.remove();
 
@@ -166,10 +173,11 @@ const createCard = (data) => {
           .catch((error) => {
             console.log(error);
           });
-      })
+      });
     },
     () => {
-      api.addLike(data._id)
+      api
+        .addLike(data._id)
         .then((result) => {
           card.like();
           card.likeCounter(result);
@@ -179,7 +187,8 @@ const createCard = (data) => {
         });
     },
     () => {
-      api.deleteLike(data._id)
+      api
+        .deleteLike(data._id)
         .then((result) => {
           card.dislike();
           card.likeCounter(result);
@@ -193,13 +202,16 @@ const createCard = (data) => {
   return card.generateCard();
 };
 
-const cardsSection = new Section({
-  renderer: (data) => {
-    const card = createCard(data);
+const cardsSection = new Section(
+  {
+    renderer: (data) => {
+      const card = createCard(data);
 
-    cardsSection.addItem(card);
-  }
-}, cardContainer);
+      cardsSection.addItem(card);
+    },
+  },
+  cardContainer
+);
 
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([data, cards]) => {
